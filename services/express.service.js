@@ -6,6 +6,10 @@ bodyParser = require('body-parser'),
 cookieParser = require('cookie-parser'),
 path = require('path');
 
+/*var __setupLogs = (app) => {
+
+}*/
+
 var _setupHeaders = (app) => {
   app.route('*').all((req,res,next) => {
     res.set({
@@ -19,22 +23,36 @@ var _setupHeaders = (app) => {
 }
 
 var _setupRoutes = (app) => {    
-  var routes = glob.sync('**/routes/**.routes.js')  
+  var routes = glob.sync('**/modules/**/routes/**.routes.js', {ignore: '**/modules/main/**'})    
   routes.forEach(file => {    
-    var router = express.Router();        
-    app.use(`/${file.match(/\w+(?=\.(routes\.js))/g)}`, require(path.resolve(file))(router))
+    var router = express.Router();       
+    var rootPath = file.match(/\w+(?=\.(routes\.js))/g)         
+    app.use(`/${rootPath}`, require(path.resolve(file))(router))    
   }) 
+}
+
+var _setupHomeRoute = (app) => {
+  var route = glob.sync('**/modules/main/routes/**.routes.js')
+  var router = express.Router();
+  app.use(require(path.resolve(route[0]))(router))
 }
 
 var _setupMiddlewares = (app) => {  
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
   app.use(cookieParser());
-  app.use(express.static(path.join(__dirname, 'public')));
+  app.use('/public', express.static(path.join(__dirname, '../public')));
 }
 
 var _setupViewEngine = (app) => {
-  app.set('views', path.join(__dirname, 'views'));
+  var views = []
+    .concat(glob.sync('**/**/**/**.page.ejs', {ignore: '**/node_modules/**'}),
+            glob.sync('**/**/**/**.partial.ejs', {ignore: '**/node_modules/**'}))
+    .map(file => path.join(__dirname,path.dirname(file)))
+
+  console.log(views)
+
+  app.set('views', views);
   app.set('view engine', 'ejs');
 }
  
@@ -46,7 +64,8 @@ class ExpressSetup {
       _setupHeaders(app)
       _setupMiddlewares(app)
       _setupViewEngine(app)
-      _setupRoutes(app)
+      _setupHomeRoute(app)
+      _setupRoutes(app)      
       console.log(`INFO - Setup Express successful`)
       resolve(app)
     })

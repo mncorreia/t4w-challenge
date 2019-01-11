@@ -1,4 +1,4 @@
-const ExpressService = require('./main_setup/express.service'),
+const ExpressService = require('./services/express.service'),
 Promise = require('bluebird')
 
 Promise.resolve()
