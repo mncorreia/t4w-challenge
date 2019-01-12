@@ -1,0 +1,21 @@
+version: '3'
+services:
+  webapp:
+    build: .
+    command: npm run dev
+    volumes:
+      - .:/usr/app/
+      - /usr/app/node_modules
+    ports:
+      - "8887:8887"
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgres://todoapp@postgres/todos
+  mongodb:
+    image: mongo:3.4
+    ports: 
+      - 27017:27017
+    environment:
+      POSTGRES_USER: todoapp
+      POSTGRES_DB: todos
