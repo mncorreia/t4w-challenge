@@ -35,48 +35,38 @@ $(document).ready(function(){
         var results = $('<div class="row hotels-available"></div>')
         data.Hotels.forEach(hotel => {
             var newHotelHtml = `            
-                <div class="col s12 m6 l4 red lighten-5"> \
-                    <div class="card large hotel-card hoverable"> \
-                    <div class="card-image waves-effect waves-block waves-light"> \
-                        <img class="activator" src="./images/sample-1.jpg"> \
-                        </div> \
-                        <div class="card-content"> \
-                            <span class="card-title activator grey-text text-darken-4">${hotel.HotelId}<i class="material-icons right">more_vert</i></span>\                    
-                        </div> \
-                    <div class="card-reveal"> \
-                            <span class="card-title grey-text text-darken-4">Confira também:<i class="material-icons right">close</i></span>\
-                            \
-                        </div> \
-                    </div> \
-                </div> \
+                <div class="col s12 m6 l4 red lighten-5"> 
+                    <div class="card large hotel-card hoverable"> 
+                    <div class="card-image waves-effect waves-block waves-light"> 
+                        <img class="activator" src="./images/sample-1.jpg"> 
+                        </div> 
+                        <div class="card-content"> 
+                            <span class="card-title activator grey-text text-darken-4">${hotel.HotelId}<i class="material-icons right">more_vert</i></span>                    
+                            <p>$ ${hotel.Rooms[0].TotalSellingPrice.Value}</p>
+                            <ul> 
+                                <li>Descrição: ${hotel.Rooms[0].BoardDescription}</li> 
+                                <li>Sobre o quarto: ${hotel.Rooms[0].RoomDescription}</li> 
+                                <li>Mais informação: ${hotel.Rooms[0].MoreInformation}</li> 
+                            </ul> 
+                        </div> 
+                    <div class="card-reveal"> 
+                            <span class="card-title grey-text text-darken-4">Confira também:<i class="material-icons right">close</i></span>            
             `
-            
-            var mainInfo= ` 
-                <p>$ ${hotel.Rooms[0].TotalSellingPrice.Value}</p>\
-                <ul> \
-                <li>Descrição: ${hotel.Rooms[0].BoardDescription}</li> \
-                <li>Sobre o quarto: ${hotel.Rooms[0].RoomDescription}</li> \
-                <li>Mais informação: ${hotel.Rooms[0].MoreInformation}</li> \
-                </ul> \
-            `
-
-            
-            var bulkedHtml = $(newHotelHtml);
-            var moreInfo= ``;
-            for(var i = 1; i < hotel.Rooms.length; i++){
-                
-                moreInfo = moreInfo.concat(`
-                    <h6>Quarto ${i + 1} - $${hotel.Rooms[i].TotalSellingPrice.Value}</h6> \
-                    <ul> \
-                        <li>${hotel.Rooms[i].BoardDescription}</li> \
-                        <li>${hotel.Rooms[i].RoomDescription}</li> \
-                    <li>${hotel.Rooms[i].MoreInformation}</li> \                   
-                    </ul>\
-                `) 
-            }
-            bulkedHtml.children('.card-content').append(mainInfo)     
-            bulkedHtml.children('.card-reveal').append(moreInfo)  
-            results.append(bulkedHtml)                        
+            let rooms = hotel.Rooms;
+            var moreInfo = "";
+            for(var i = 1; i < rooms.length; i++){                
+                moreInfo += `
+                    <h6>Quarto ${i + 1} - $${rooms[i].TotalSellingPrice.Value}</h6> 
+                    <ul> 
+                        <li>${rooms[i].BoardDescription}</li> 
+                        <li>${rooms[i].RoomDescription}</li> 
+                    <li>${rooms[i].MoreInformation}</li>                  
+                    </ul>
+                `
+            }       
+            newHotelHtml += moreInfo + `</div> </div> </div> `
+            console.log(newHotelHtml)
+            $(results)[0].innerHTML += newHotelHtml
         });        
         $('body').append(results)            
         

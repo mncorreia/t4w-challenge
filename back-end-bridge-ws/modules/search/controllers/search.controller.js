@@ -55,7 +55,7 @@ exports.findHotels = (req, res, next) => {
         .then(_validationServiceResponse)
         .then(_sortResultByAscPrice)
         .then(response => {
-            res.status(200).json(response)
+            return res.status(200).json(response)
         })
         .catch(CantFindHotelError, err => res.status(404).json({ error: err.message }))
         .catch(err => next(err))

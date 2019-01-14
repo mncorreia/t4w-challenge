@@ -46,7 +46,7 @@ class CangoorooService {
         }))
         .then(response => Promise.resolve(response))
         .catch(err => {
-            console.error(err.message)
+            console.error(err)
             return Promise.reject(new CantFindHotelError('Houve um problema na busca dos hotéis'))
         })
     }
