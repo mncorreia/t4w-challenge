@@ -2,7 +2,7 @@
 
 ## Para executar os testes é necessário:
 
-- Node instalado (Ideal se ser a versão v8.11.3)
+- Node instalado (Ideal acima da versão v8.11)
 - Opcional(docker)
 
 ## A aplicação é divida em duas partes:
