@@ -1,21 +1,20 @@
 version: '3'
 services:
-  webapp:
-    build: .
-    command: npm run dev
+  frontend:
+    image: nginx:1.15.7
     volumes:
-      - .:/usr/app/
+      - ./front-end-app:/usr/share/nginx/html/
+    ports:
+      - 80:80
+    depends_on:
+      - backend
+  backend:
+    build: ./back-end-bridge-ws/
+    command: npm start
+    volumes:
+      - ./back-end-bridge-ws:/usr/src/app
       - /usr/app/node_modules
     ports:
-      - "8887:8887"
-    depends_on:
-      - postgres
+      - 8887:8887
     environment:
-      DATABASE_URL: postgres://todoapp@postgres/todos
-  mongodb:
-    image: mongo:3.4
-    ports: 
-      - 27017:27017
-    environment:
-      POSTGRES_USER: todoapp
-      POSTGRES_DB: todos
+      - NODE_ENV="development"

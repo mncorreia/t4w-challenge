@@ -1,0 +1,193 @@
+.preloader-background {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+  background-color: black;
+  opacity: 0.3;
+	
+	position: fixed;
+	z-index: 100;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;	
+}
+
+.search-bar{
+  line-height: 3rem;
+}
+
+.btn-floating .material-icons{
+  position: relative;
+  bottom: 0.25em;
+}
+
+.search-bar label{
+  color: white;
+}
+
+.input-field:not(.search-bar) i{
+  color: #424242;
+  top: 0;
+}
+
+.input-field:not(.search-bar) ::placeholder{
+  color: #424242;
+  opacity: 0.9;
+}
+
+.input-field:not(.search-bar) :-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #424242;
+  opacity: 0.9;
+}
+
+.input-field:not(.search-bar) ::-ms-input-placeholder { /* Microsoft Edge */
+  color: #424242;
+  opacity: 0.9;
+}
+
+.input-field input[type=text]:not(.browser-default){
+  color: white
+}
+
+.input-field:not(.search-bar) input[type=text]:not(.browser-default){
+  color: #424242
+}
+
+.input-field .chips .input{
+  width: 208px !important;
+}
+
+.datepicker-day-button{
+  color: #212121
+}
+
+.input-field input[type=text]:focus + label {
+  color: white;
+  display: none
+}
+
+.input-field input:-internal-autofill-selected{
+  background-color: #FFFFFF !important
+}
+
+nav .input-field.search-bar input[type=text]:valid{
+  position: relative;
+  top:13px;
+  height: 32px;
+}
+
+.input-field input[type=text]:focus {
+  border-bottom: 1px solid #FFF;
+  box-shadow: 0 1px 0 0 #FFF;
+}
+
+.input-field.search-bar i.active{
+  color: #FFFFFF;
+}
+
+.input-field.search-bar input:not([type]):focus:not([readonly])+label, 
+.input-field.search-bar input[type=text]:not(.browser-default):focus:not([readonly])+label,
+.input-field.search-bar input[type=text]:not(.browser-default):focus:not([readonly]){
+  top:13px;
+  height: 32px;
+  color: #FFFFFF;
+  border-bottom: 1px solid #FFFFFF;  
+  box-shadow: 0 1px 0 0 #FFFFFF;   
+}
+
+.input-field input:not([type]):focus:not([readonly])+label, 
+.input-field input[type=text]:not(.browser-default):focus:not([readonly])+label,
+.input-field input[type=text]:not(.browser-default):focus:not([readonly]){
+  top:13px;
+  height: 32px;
+  color: #424242;
+  border-bottom: 1px solid #424242;  
+  box-shadow: 0 1px 0 0 #424242;   
+}
+
+input:not([type]):not([value]){
+  width: 120px !important;
+}
+
+input:not([type]):not(.browser-default).input-chip{
+  border: none; 
+  border-bottom: none; 
+  border-radius: 0;
+}
+
+.input-field>label:not(.label-icon).active{
+  display: none
+}
+
+.input-field input[type=text].valid {
+  border-bottom: 1px solid #FFFFFF;
+  box-shadow: 0 1px 0 0 #FFFFFF;
+}
+/* invalid color */
+.input-field input[type=text].invalid {
+  border-bottom: 1px solid #FFFFFF;
+  box-shadow: 0 1px 0 0 #FFFFFF;
+}
+
+.chips.focus {
+  border-bottom: 1px solid #424242;
+  box-shadow: 0 1px 0 0 #424242;
+}
+
+/*Mobile screen sizes */
+@media only screen and (max-width: 993px) {
+  .hotel-card {    
+    height: 30em !important
+  }  
+  .input-field .prefix ~ input {
+    width: 75%
+  }
+
+  nav .input-field.search-bar input[type=text]:valid{
+    width: calc(100% - (40px + 56px));
+  }
+
+  .input-field.col.s12.search-bar .btn-floating{
+    top: .5em;
+    float: right !important;
+  }
+
+  .row .col.s12.search-bar{
+    height: 56px;
+  }
+
+  .input-adults label{
+    color: #424242;
+    height: 42px;
+    position: absolute;
+    margin: 0;
+    top: -.5em !important;
+    left: 42px;
+    right: 0px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: calc(100% - 42px);
+  }
+}
+/* Not mobile screen sizes (tablet/desktop)*/
+@media only screen and (min-width: 993px) {
+  .input-field .prefix ~ input {
+    width: 50%
+  }
+
+  .row .col.l12.search-bar{
+    height: 64px;
+  }
+
+  .row .col.l12.search-bar .btn-floating{
+    position: relative;
+    top: .4em;
+  }
+
+  .row .col.l12.search-bar label{
+    width: 35%;
+  }
+
+}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Resultado da sua busca
+    </title>
+    <meta charset="UTF-8">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link type="text/css" rel="stylesheet" href="./stylesheets/materialize.min.css" media="screen,projection" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="./stylesheets/style.css">
+</head>
+
+<body class="red lighten-5">
+    
+    <nav class="red lighten-3" role="navigation">
+        <div class="container">
+            <div class="row">
+                <form >
+                    <div class="input-field col s12 l12 search-bar">
+                        <i class="material-icons prefix">search</i>
+                        <input type="text" id="autocomplete-input" class="autocomplete" autocomplete="off" name="destination">
+                        <label for="autocomplete-input">Começe por aqui...</label>
+                        <a id="search-hotel" class="btn-floating waves-effect waves-light"><i class="material-icons left">send</i></a>
+                    </div>                    
+                    <div class="input-field col s6 l6">
+                        <i class="material-icons prefix">date_range</i>
+                        <input id="checkinDate" type="text" class="datepicker" placeholder="Check-in" name="checkinDate">                        
+                    </div>
+                    <div class="input-field col s6 l6">
+                        <i class="material-icons prefix">chevron_right</i>
+                        <input id="checkoutDate" type="text" class="datepicker" placeholder="Check-out" name="checkoutDate">                  
+                    </div>
+                    <div class="input-field col s12 l4 input-adults">
+                            <i class="material-icons prefix">people</i>
+                            <input id="icon_prefix" name="numAdults" type="text">
+                            <label for="icon_prefix">Número de adultos</label>   
+                    </div>
+                    <div class="input-field col s12 l8">
+                            <i class="material-icons prefix">child_care</i>
+                            <div id="childs-chips" class="chips chips-placeholder">     
+                                <input class="input-chip" maxlength="2">                           
+                            </div>      
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </nav>  
+
+    <div class="preloader-background hide">
+            <div class="preloader-wrapper big active">
+                <div class="spinner-layer spinner-blue-only">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+
+    <!-- Default scripts -->
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="js/functions.js"></script>
+</body>
+
+</html>
