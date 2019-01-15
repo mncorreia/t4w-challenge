@@ -1,3 +1,4 @@
+const fs = require("fs");
 const rp = require('request-promise'),
     cangoorooUri = 'https://pp.cangooroo.net/ws/rest/hotel.svc/Search',
     credential = { Username: 'candidato_t4w', Password: 'candit@!2019'},
@@ -45,6 +46,22 @@ class CangoorooService {
                 jsonReviver:true
         }))
         .then(response => Promise.resolve(response))
+        .then(response => {
+            let staticData =  fs.readFileSync("./data/"+_destinationId + "_hotels_static_data.json");
+            let jsonStaticData = JSON.parse(staticData);
+            
+            response.Hotels.forEach(hotel=> {
+                let staticHotelData = jsonStaticData.find(sh=> sh.id === hotel.HotelId);
+
+                if(staticHotelData)
+                    {
+                        hotel.Name = staticHotelData.name;
+                        hotel.ImageUrl = staticHotelData.urlThumb;
+                    }
+            });
+
+            return Promise.resolve(response)
+        } )
         .catch(err => {
             console.error(err)
             return Promise.reject(new CantFindHotelError('Houve um problema na busca dos hotéis'))

@@ -35,13 +35,13 @@ $(document).ready(function(){
         var results = $('<div class="row hotels-available"></div>')
         data.Hotels.forEach(hotel => {
             var newHotelHtml = '\
-                <div class="col s12 m6 l4 red lighten-5"> \
+                    <div class="col s12 m6 l4 red lighten-5"> \
                     <div class="card large hotel-card hoverable"> \
                     <div class="card-image waves-effect waves-block waves-light"> \
-                        <img class="activator" src="./images/sample-1.jpg"> \
+                        <img class="activator" src="'+ hotel.ImageUrl +'"> \
                         </div> \
                         <div class="card-content"> \
-                            <span class="card-title activator grey-text text-darken-4">' + hotel.HotelId + '<i class="material-icons right">more_vert</i></span>                    \
+                            <span class="card-title activator grey-text text-darken-4">' + hotel.Name + '<i class="material-icons right">more_vert</i></span>                    \
                             <p>$'+ hotel.Rooms[0].TotalSellingPrice.Value +'</p>\
                             <ul> \
                                 <li>Descrição: '+hotel.Rooms[0].BoardDescription + '</li> \
