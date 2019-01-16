@@ -1,15 +1,8 @@
 const Promise = require('bluebird'),
     CangoorooService = require('../../../services/consumer.service'),
-    ejs = require('ejs'),
-    path = require('path'),
-    fs = require('fs'),
-    views = path.resolve('./views'),
-    moment = require('moment'),
     { check, validationResult } = require('express-validator/check'),
     { sanitizeQuery } = require('express-validator/filter'),
-    ValidationFormError = require('../errors/validate-form.error'),
-    CantFindHotelError = require('../errors/cant-find-hotel.error'),
-    util = require('util')
+    CantFindHotelError = require('../errors/cant-find-hotel.error');
 
 
 exports.findHotels = (req, res, next) => {
@@ -28,9 +21,7 @@ exports.findHotels = (req, res, next) => {
         hotels = mResponse['Hotels'];
         
         //console.debug(`IS ARRAY${Array.isArray(hotels)}`)
-        if (hotels.length > 0) {           
-
-            
+        if (hotels.length > 0) {         
             hotels = hotels.map((hotel, index, arr) => {
                 hotel['Rooms'] = hotel['Rooms'].sort((a, b) => {
                     return a.TotalSellingPrice.Value - b.TotalSellingPrice.Value

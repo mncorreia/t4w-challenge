@@ -1,3 +1,5 @@
+const SERVER_URL='http://192.168.99.100:8887'
+
 $(document).ready(function(){    
     var pickerElems = document.querySelectorAll('.datepicker');
     var pickerInstances = M.Datepicker.init(pickerElems, {
@@ -38,7 +40,7 @@ $(document).ready(function(){
                     <div class="col s12 m6 l4 red lighten-5"> \
                     <div class="card large hotel-card hoverable"> \
                     <div class="card-image waves-effect waves-block waves-light"> \
-                        <img class="activator" src="'+ hotel.ImageUrl +'"> \
+                        <img class="activator" src="'+ `${hotel.ImageUrl || './images/sample-1.jpg'}` +'"> \
                         </div> \
                         <div class="card-content"> \
                             <span class="card-title activator grey-text text-darken-4">' + hotel.Name + '<i class="material-icons right">more_vert</i></span>                    \
@@ -80,7 +82,7 @@ $(document).ready(function(){
         console.log( $( this ).serialize());
 
         $('.preloader-background').removeClass('hide')
-        $.getJSON(`http://localhost:8887/search?` + $(this).serialize(), (data) => {  
+        $.getJSON(`${SERVER_URL}/search?` + $(this).serialize(), (data) => {  
             console.log(data);
             _showOffersData(data)
         }).fail((err, xhr, tal) => {
