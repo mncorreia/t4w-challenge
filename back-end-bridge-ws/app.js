@@ -1,28 +1,29 @@
 const ExpressService = require('./services/express.service'),
-Promise = require('bluebird')
+LoggerService = require('./services/logger.service'),
+Promise = require('bluebird'),
+util = require('util');
 
 Promise.resolve()
+.then(LoggerService.setupLoggerService)
 .then(ExpressService.start)
 .then(app => {
   //console.log("APP " + app)
-  if(process.env.DEBUG)
-    ExpressService.allowDebug()
 
   var server = app.listen(8887, () =>{
-    console.log(server.address())
+    console.info(util.inspect(server.address()))
   }).on('listening', () => {
-    console.log('Info - Server listening...')
+    console.info('Server listening...')
   }).on('connection', () => {
-    console.log('An connection incoming...')
+    console.warn('An connection incoming...')
   }).on('error', (e) => {
     if (e.code === 'EADDRINUSE') 
-      console.log(`ERROR ${e.code} - Address already in use`);
+      console.error(`${e.code} - Address already in use`);
 
     if (e.code === 'ECONNRESET') 
-      console.log(`ERROR ${e.code} - Connection reset by peer`);
+      console.error(`${e.code} - Connection reset by peer`);
 
     else 
-      console.log(`ERROR ${e.code} - ${e.message}`);    
+      console.error(`${e.code} - ${e.message}`);    
       
   })
   

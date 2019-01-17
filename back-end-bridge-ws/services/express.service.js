@@ -61,12 +61,12 @@ class ExpressSetup {
   static start(){
     return new Promise((resolve,reject) => {
       const app = express()
-      console.info(`INFO - Setup Express initialized`)      
+      console.info(`Setup Express initialized`)      
       _setupMiddlewares(app)
       _setupHeaders(app)
       _setupRoutes(app)     
       _handleErrors(app) 
-      console.info(`INFO - Setup Express successful`)
+      console.info(`Setup Express successful`)
       resolve(app)
     })
   }
