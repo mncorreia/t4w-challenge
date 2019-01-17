@@ -1,12 +1,22 @@
-const { createLogger, format, transports } = require('winston'),
-    { combine, timestamp, colorize, printf, splat, simple, prettyPrint} = format,
+const { createLogger, format, transports } = require('winston'),    
+    { combine, timestamp, colorize, printf, splat, simple, prettyPrint} = format,    
     Promise = require('bluebird');
+require('winston-daily-rotate-file');
 
     function _settinLogLevels () {
     
         const consoleTransport = new transports.Console({
             level: 'info',
             stderrLevels: ['error']
+        })
+
+        const rotateLogFile = new (transports.DailyRotateFile)({
+            filename: './logs/backend-%DATE%.log',
+            verbose: false,
+            datePattern: 'YYYY-MM-DD',
+            zippedArchive: true,
+            maxSize: '100m',
+            maxFiles: '14d'
         })
         
         const logger = createLogger({
@@ -21,7 +31,8 @@ const { createLogger, format, transports } = require('winston'),
                 colorize({colors:{info: 'green', debug: 'blue', error:'red', warning: 'yellow'}}),
                 printf(info => `${info.timestamp} - [${info.level}] : ${info.message}`)
                 
-            )
+            ),
+            transports: [rotateLogFile]
         });
     
         if(process.env.NODE_DEBUG || process.env.NODE_ENV !== 'production'){
