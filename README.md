@@ -5,10 +5,10 @@
 - Node instalado (Ideal acima da versão v8.11)
 - Opcional(docker)
 
-## A aplicação é divida em duas partes:
+## A aplicação é dividida em duas partes:
 
 - API Rest NodeJs:
-   Faz a ponte entre uma rota de busca de hotéis do serviço disponível no desafio, validando o dado, ordenando e retorno.
+   Faz a ponte entre uma rota de busca de hotéis no serviço disponível no desafio, validando os dados, ordenando e retornando.
 
 - FrontEnd :
     Uma única página para busca dos dados no back-end e disponibilizando na página.
